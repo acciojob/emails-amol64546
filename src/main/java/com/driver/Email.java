@@ -22,7 +22,7 @@ public class Email {
         //Change password only if the oldPassword is equal to current password and the new password meets all of the following:
         if(!oldPassword.equals(this.password)) return;
         // 1. It contains at least 8 characters
-        if(newPassword.length()!=8) return;
+        if(newPassword.length()<8) return;
         // 2. It contains at least one uppercase letter
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
@@ -34,12 +34,9 @@ public class Email {
 
         for(char ch: newPassword.toCharArray()){
             if(Character.isDigit(ch)) isDigit = true;
-            else if(Character.isLetter(ch)){
-                if(Character.isUpperCase(ch)) isUpper = true;
-                else if(Character.isLowerCase(ch)) isLower = true;
-            }else{
-                isSpecial = true;
-            }
+            else if(Character.isUpperCase(ch)) isUpper = true;
+            else if(Character.isLowerCase(ch)) isLower = true;
+            else   isSpecial = true;
         }
         if(isDigit && isLower && isUpper && isSpecial){
             this.password = newPassword;
